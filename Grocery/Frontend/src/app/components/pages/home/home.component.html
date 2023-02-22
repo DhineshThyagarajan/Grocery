@@ -1,0 +1,42 @@
+<app-search></app-search>
+<app-tags></app-tags>
+<app-not-found
+  [visible]= "!groceries || !groceries.length"
+  resetLinkText="Reset Search">
+</app-not-found>
+  <ul>
+  <li *ngFor="let grocery of groceries">
+    <a routerLink="/grocery/{{ grocery.id }}">
+      <img [src]="grocery.imageURl" [alt]="grocery.name" />
+      <div class="content">
+        <div class="name">
+          {{ grocery.name }}
+        </div>
+        <span class="favourite {{ grocery.favorite ? '' : 'not' }}">❤</span>
+        <div class="stars">
+          <star-rating
+            [value]="grocery.stars"
+            [totalstars]=5
+            checkedcolor="red"
+            uncheckedcolor="black"
+            size="22px"
+            [readonly]="true">
+          </star-rating>
+        </div>
+        <div class="product-item-footer">
+          <div class="origins">
+            <span *ngFor="let origin of grocery.origins">
+              {{origin}}
+            </span>
+          </div>
+        </div>
+
+        <div class="price">
+          <span>
+            {{grocery.price | currency}}
+          </span>
+        </div>
+      </div>
+    </a>
+  </li>
+</ul>
